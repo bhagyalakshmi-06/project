@@ -1,43 +1,44 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// Import your pages
-import Login from "./pages/Login";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import AdminLogin from "./pages/AdminLogin";
 import Home from "./pages/Home";
-import BookList from "./pages/BookList";
-import BookDetails from "./pages/BookDetails";  // or SingleBook
 import Profile from "./pages/Profile";
+import BookList from "./pages/BookList";
+import BookDetails from "./pages/BookDetails";
+import AdminDashboard from "./pages/AdminDashboard";
 
-function App() {
+function Layout() {
+  const location = useLocation();
+  const hideNavbarPages = ["/login", "/signup", "/admin/login"];
+  const hideNavbar = hideNavbarPages.includes(location.pathname);
+
   return (
-    <Router>
+    <>
+      {!hideNavbar && <Navbar />}
       <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
 
-        {/* Login (default page) */}
-        <Route path="/" element={<Login />} />
-
-        {/* Signup */}
-        <Route path="/signup" element={<Signup />} />
-
-        {/* Home */}
+        {/* User Pages */}
         <Route path="/home" element={<Home />} />
-
-        {/* Book List */}
         <Route path="/books" element={<BookList />} />
-
-        {/* Single Book Details */}
         <Route path="/book/:id" element={<BookDetails />} />
-
-        {/* Profile Page */}
         <Route path="/profile" element={<Profile />} />
 
-        {/* Fallback page */}
-        <Route path="*" element={<h1 className="text-center mt-20">Page Not Found</h1>} />
-
+        {/* Admin Pages */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
+}
