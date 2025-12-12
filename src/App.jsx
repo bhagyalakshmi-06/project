@@ -11,25 +11,27 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 function Layout() {
   const location = useLocation();
-  const hideNavbarPages = ["/login", "/signup", "/admin/login"];
+
+  // Pages where Navbar should be hidden
+  const hideNavbarPages = ["/", "/login", "/signup", "/admin/login"];
   const hideNavbar = hideNavbarPages.includes(location.pathname);
 
   return (
     <>
-      {!hideNavbar && <Navbar />}
+      {!hideNavbar && <Navbar />} 
       <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-        {/* User Pages */}
+        {/* Admin */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        {/* User pages */}
         <Route path="/home" element={<Home />} />
         <Route path="/books" element={<BookList />} />
         <Route path="/book/:id" element={<BookDetails />} />
         <Route path="/profile" element={<Profile />} />
-
-        {/* Admin Pages */}
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </>
   );

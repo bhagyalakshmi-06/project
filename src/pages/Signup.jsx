@@ -17,7 +17,6 @@ export default function Signup() {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    // Validation
     if (!name || !age || !place || !education || !phone || !email || !password || !confirmPassword) {
       alert("Please fill all fields");
       return;
@@ -33,7 +32,6 @@ export default function Signup() {
       return;
     }
 
-    // Save user in localStorage
     const userData = {
       role: "user",
       name,
@@ -51,31 +49,101 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <form onSubmit={handleSignup} className="bg-white p-6 rounded shadow w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Signup</h1>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1950&q=80')",
+      }}
+    >
+      {/* Overlay to darken background but keep image visible */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
-        <input placeholder="Name" className="w-full p-2 border rounded mb-2" value={name} onChange={(e)=>setName(e.target.value)} />
-        <input placeholder="Age" className="w-full p-2 border rounded mb-2" value={age} onChange={(e)=>setAge(e.target.value)} />
-        <input placeholder="Place" className="w-full p-2 border rounded mb-2" value={place} onChange={(e)=>setPlace(e.target.value)} />
-        <input placeholder="Education" className="w-full p-2 border rounded mb-2" value={education} onChange={(e)=>setEducation(e.target.value)} />
-        <input placeholder="Phone Number" className="w-full p-2 border rounded mb-2" value={phone} onChange={(e)=>setPhone(e.target.value)} />
-        <input placeholder="Email" type="email" className="w-full p-2 border rounded mb-2" value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" className="w-full p-2 border rounded mb-2" value={password} onChange={(e)=>setPassword(e.target.value)} />
-        <input placeholder="Confirm Password" type="password" className="w-full p-2 border rounded mb-2" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} />
+      <div className="relative bg-[#3a2314]/90 p-10 rounded-2xl shadow-lg max-w-md w-full backdrop-blur-sm border border-[#a67c52] z-10">
+        <h1 className="text-3xl font-serif mb-6 text-center text-[#f2d16b]">
+          Signup
+        </h1>
 
-        <label className="flex items-center mb-2">
-          <input type="checkbox" checked={terms} onChange={()=>setTerms(!terms)} className="mr-2" />
-          I accept terms & conditions (If book not returned or damaged, fine will be charged)
-        </label>
+        <form onSubmit={handleSignup} className="flex flex-col gap-3">
+          <input
+            placeholder="Name"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            placeholder="Age"
+            type="number"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+          <input
+            placeholder="Place"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={place}
+            onChange={(e) => setPlace(e.target.value)}
+          />
+          <input
+            placeholder="Education"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={education}
+            onChange={(e) => setEducation(e.target.value)}
+          />
+          <input
+            placeholder="Phone Number"
+            type="number"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <input
+            placeholder="Email"
+            type="email"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            placeholder="Confirm Password"
+            type="password"
+            className="w-full p-3 rounded border border-[#a67c52] bg-[#4a2e1b]/40 text-[#f2e3c6] placeholder-[#d1bfa7] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
 
-        <button className="bg-blue-600 text-white w-full p-2 rounded mb-2">Signup</button>
+          <label className="flex items-center text-[#f2d16b]">
+            <input
+              type="checkbox"
+              checked={terms}
+              onChange={() => setTerms(!terms)}
+              className="mr-2 accent-[#d4af37] w-5 h-5"
+            />
+            I accept terms & conditions
+          </label>
 
-        <p className="text-center">
-          Already a user? <a href="/login" className="text-blue-600">Login</a><br/>
-          Admin? <a href="/admin/login" className="text-red-600">Admin Login</a>
+          <button className="bg-[#a67c52] text-[#3a2314] py-3 rounded font-serif font-semibold hover:bg-[#d4af37] hover:text-[#3a2314] transition-all">
+            Signup
+          </button>
+        </form>
+
+        <p className="text-center mt-4 text-[#f2d16b] font-serif">
+          Already a user?{" "}
+          <span
+            onClick={() => nav("/login")}
+            className="cursor-pointer font-semibold hover:underline"
+          >
+            Login
+          </span>
         </p>
-      </form>
+      </div>
     </div>
   );
 }
