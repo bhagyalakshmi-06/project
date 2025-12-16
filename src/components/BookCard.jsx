@@ -1,29 +1,44 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const BookCard = ({ book }) => {
+const FALLBACK =
+  "https://covers.openlibrary.org/b/id/10909258-L.jpg";
+
+export default function BookCard({ book }) {
+  const [liked, setLiked] = useState(false);
+  const navigate = useNavigate();
+  
+  const viewBook = () => {
+    navigate(`/book/${book.id}`, { state: { book } }); // "/book/:id" matches App.jsx
+  };
+  
   return (
-    <div className="bg-[#fdf6e3] p-5 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 border border-[#e3d4b9]">
-      <h2 className="text-xl font-serif font-bold text-[#8b5e3c]">{book.title}</h2>
-      <p className="text-[#6b4a2e] mt-1">{book.author}</p>
+    <div className="bg-white p-4 rounded-xl shadow hover:shadow-xl transition cursor-pointer">
+      <img
+        src={book.image}
+        onError={(e) => (e.target.src = FALLBACK)}
+        alt={book.title}
+        className="h-56 w-full object-cover rounded-lg"
+      />
 
-      <span
-        className={`inline-block mt-3 px-3 py-1 rounded text-sm font-semibold ${
-          book.available
-            ? "bg-green-200 text-green-800"
-            : "bg-red-200 text-red-800"
-        }`}
+      <h2 className="mt-3 font-bold text-lg">{book.title}</h2>
+      <p className="text-gray-600">{book.author}</p>
+
+      {/* ❤️ LIKE */}
+      <button
+        onClick={() => setLiked(!liked)}
+        className="mt-2 text-xl"
       >
-        {book.available ? "Available" : "Rented"}
-      </span>
+        {liked ? "❤️" : "🤍"}
+      </button>
 
-      <Link
-        to={`/books/${book.id}`}
-        className="block mt-4 bg-[#e3c17a] text-[#4a2e1b] px-4 py-2 rounded font-serif font-semibold text-center hover:bg-[#d4af37] hover:text-[#3a2314] transition"
+      {/* VIEW */}
+      <button
+        onClick={viewBook}
+        className="block mt-3 w-full bg-[#d4af37] text-white text-center py-2 rounded"
       >
         View Book
-      </Link>
+      </button>
     </div>
   );
-};
-
-export default BookCard;
+}

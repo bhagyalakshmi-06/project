@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const FALLBACK_IMAGE =
+  "https://covers.openlibrary.org/b/id/10909258-L.jpg";
+
 export default function Home() {
   const nav = useNavigate();
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Vintage books data
   const vintageBooks = [
     {
       id: 1,
@@ -15,7 +17,7 @@ export default function Home() {
       year: 1813,
       genre: "Romance",
       isbn: "9780141040349",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1544936207-387e4c9f1972",
     },
     {
@@ -25,7 +27,7 @@ export default function Home() {
       year: 1851,
       genre: "Adventure",
       isbn: "9781503280786",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
     },
     {
@@ -35,7 +37,7 @@ export default function Home() {
       year: 1847,
       genre: "Gothic",
       isbn: "9780141441146",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
     },
     {
@@ -45,7 +47,7 @@ export default function Home() {
       year: 1847,
       genre: "Gothic",
       isbn: "9781853260018",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1519681393784-d120267933ba",
     },
     {
@@ -55,7 +57,7 @@ export default function Home() {
       year: 1925,
       genre: "Tragedy",
       isbn: "9780743273565",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1543007630-9710e4a00a20",
     },
     {
@@ -65,7 +67,7 @@ export default function Home() {
       year: 1866,
       genre: "Psychological",
       isbn: "9780486415871",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1512820790803-83ca734da794",
     },
     {
@@ -75,7 +77,7 @@ export default function Home() {
       year: 1890,
       genre: "Gothic",
       isbn: "9780141442464",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1589820296156-2454bb8f8337",
     },
     {
@@ -85,7 +87,7 @@ export default function Home() {
       year: 1897,
       genre: "Horror",
       isbn: "9780486411095",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d",
     },
     {
@@ -95,7 +97,7 @@ export default function Home() {
       year: 1868,
       genre: "Fiction",
       isbn: "9780147514011",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
     },
     {
@@ -105,7 +107,7 @@ export default function Home() {
       year: 1869,
       genre: "Historical",
       isbn: "9780199232765",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1463320898484-cdee8141c787",
     },
     {
@@ -115,7 +117,7 @@ export default function Home() {
       year: -800,
       genre: "Epic",
       isbn: "9780140268867",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
     },
     {
@@ -125,7 +127,7 @@ export default function Home() {
       year: 1861,
       genre: "Fiction",
       isbn: "9780141439563",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1589820296156-2454bb8f8337",
     },
     {
@@ -135,7 +137,7 @@ export default function Home() {
       year: 1877,
       genre: "Tragedy",
       isbn: "9780140449174",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1544936207-387e4c9f1972",
     },
     {
@@ -145,7 +147,7 @@ export default function Home() {
       year: 1880,
       genre: "Philosophical",
       isbn: "9780374528379",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1512820790803-83ca734da794",
     },
     {
@@ -155,7 +157,7 @@ export default function Home() {
       year: 1856,
       genre: "Fiction",
       isbn: "9780140449129",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1543007630-9710e4a00a20",
     },
     {
@@ -165,7 +167,7 @@ export default function Home() {
       year: 1818,
       genre: "Horror",
       isbn: "9780486282114",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d",
     },
     {
@@ -175,7 +177,7 @@ export default function Home() {
       year: -750,
       genre: "Epic",
       isbn: "9780140275360",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1463320898484-cdee8141c787",
     },
     {
@@ -185,7 +187,7 @@ export default function Home() {
       year: 1886,
       genre: "Horror",
       isbn: "9780486266886",
-      rented: true,
+      available: false,
       image: "https://images.unsplash.com/photo-1589820296156-2454bb8f8337",
     },
     {
@@ -195,7 +197,7 @@ export default function Home() {
       year: 1811,
       genre: "Romance",
       isbn: "9780141439662",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
     },
     {
@@ -205,7 +207,7 @@ export default function Home() {
       year: 1844,
       genre: "Adventure",
       isbn: "9780140449266",
-      rented: false,
+      available: true,
       image: "https://images.unsplash.com/photo-1519681393784-d120267933ba",
     },
   ];
@@ -215,71 +217,55 @@ export default function Home() {
   }, []);
 
   const filteredBooks = books.filter(
-    (book) =>
-      book.title.toLowerCase().includes(search.toLowerCase()) ||
-      book.author.toLowerCase().includes(search.toLowerCase())
+    (b) =>
+      b.title.toLowerCase().includes(search.toLowerCase()) ||
+      b.author.toLowerCase().includes(search.toLowerCase())
   );
 
-  const viewBook = (id) => {
-    nav(`/book/${id}`);
+  const viewBook = (book) => {
+    nav(`/books/${book.id}`, { state: { book } });
   };
 
   return (
-    <div
-      className="min-h-screen p-6 bg-cover bg-center relative"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1950&q=80')",
-      }}
-    >
-      {/* Soft overlay for contrast */}
-      <div className="absolute inset-0 bg-[#fff6e3]/70"></div>
+    <div className="min-h-screen p-6 bg-[#fff6e3]">
+      <h1 className="text-4xl font-serif text-center mb-8 text-[#8b5e3c]">
+        FastReach Library
+      </h1>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-serif text-[#8b5e3c] text-center mb-8 drop-shadow-md">
-          FastReach Library
-        </h1>
+      <div className="max-w-lg mx-auto mb-8">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by title or author..."
+          className="w-full p-3 rounded-lg border"
+        />
+      </div>
 
-        {/* Search box */}
-        <div className="max-w-lg mx-auto mb-8">
-          <input
-            type="text"
-            placeholder="Search by title or author..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-3 rounded-lg border border-[#d4b880] bg-[#fff8f0]/70 text-[#5c3b1f] placeholder-[#a68c66] font-serif focus:outline-none focus:ring-2 focus:ring-[#d4af37] shadow-md"
-          />
-        </div>
-
-        {/* Books grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {filteredBooks.map((book) => (
-            <div
-              key={book.id}
-              className="bg-[#fff8f0]/90 p-4 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer transition transform hover:-translate-y-1 border border-[#e3d4b9]"
-              onClick={() => viewBook(book.id)}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {filteredBooks.map((book) => (
+          <div
+            key={book.id}
+            onClick={() => viewBook(book)}
+            className="bg-white p-4 rounded-xl shadow-lg cursor-pointer hover:-translate-y-1 transition"
+          >
+            <img
+              src={book.image}
+              alt={book.title}
+              className="w-full h-60 object-cover rounded-lg mb-3"
+              onError={(e) => (e.target.src = FALLBACK_IMAGE)}
+            />
+            <h2 className="font-bold">{book.title}</h2>
+            <p>{book.author}</p>
+            <p
+              className={`mt-2 font-semibold ${
+                book.available ? "text-green-600" : "text-red-600"
+              }`}
             >
-              <img
-                src={book.image}
-                alt={book.title}
-                className="w-full h-60 object-cover rounded-xl mb-3"
-              />
-              <h2 className="font-bold text-lg text-[#8b5e3c]">{book.title}</h2>
-              <p className="text-[#6b4a2e]">{book.author}</p>
-              <p className="text-[#6b4a2e] text-sm mt-1">Genre: {book.genre}</p>
-              <p className="text-[#6b4a2e] text-sm">Year: {book.year}</p>
-              <p className="text-[#6b4a2e] text-sm">ISBN: {book.isbn}</p>
-              <p
-                className={`mt-2 font-semibold ${
-                  book.rented ? "text-red-600" : "text-green-600"
-                }`}
-              >
-                {book.rented ? "Rented" : "Available"}
-              </p>
-            </div>
-          ))}
-        </div>
+              {book.available ? "Available" : "Rented"}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
-}
+}                                                        

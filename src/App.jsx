@@ -20,6 +20,7 @@ function Layout() {
     <>
       {!hideNavbar && <Navbar />} 
       <Routes>
+        
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
@@ -31,6 +32,8 @@ function Layout() {
         <Route path="/home" element={<Home />} />
         <Route path="/books" element={<BookList />} />
         <Route path="/book/:id" element={<BookDetails />} />
+        <Route path="/books/:id" element={<BookDetails />} /> // matches "/books/1"
+
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
@@ -43,4 +46,4 @@ export default function App() {
       <Layout />
     </BrowserRouter>
   );
-}
+}  
